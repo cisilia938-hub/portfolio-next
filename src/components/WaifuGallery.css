@@ -1,0 +1,291 @@
+/* WaifuGallery.css */
+
+.galleryContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: var(--font-montserrat), sans-serif;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.galleryHeader {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.galleryTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.galleryDesc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.galleryProgress {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1A73E8;
+  background: rgba(26,115,232,0.1);
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+body.dark .galleryProgress {
+  color: #8AB4F8;
+  background: rgba(138,180,248,0.1);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+  justify-content: center;
+  padding-bottom: 32px;
+}
+
+.galleryCard {
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: #000;
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+  aspect-ratio: 3/4;
+}
+
+.galleryCard.unlocked {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.galleryCard.unlocked:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15), 0 0 0 2px var(--glow-color, #1A73E8);
+}
+
+.galleryCard.locked {
+  opacity: 0.7;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: default;
+  pointer-events: none;
+}
+.galleryCard.locked .galleryImg {
+  filter: brightness(0) invert(0.1); /* Creates a silhouette */
+}
+body.dark .galleryCard.locked .galleryImg {
+  filter: brightness(0) invert(0.2);
+}
+
+.galleryImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.galleryImgContainer {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 36px);
+}
+
+.galleryNameContainer {
+  background: var(--surface-color);
+  padding: 8px 4px;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galleryName {
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.lockedText {
+  color: #888;
+  font-weight: 900;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* WIKI MODAL */
+.wikiOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+}
+
+.wikiModal {
+  background: var(--surface-color);
+  width: 100%;
+  max-width: 800px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  position: relative;
+  max-height: 90vh;
+}
+body.dark .wikiModal {
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive row to col */
+@media (max-width: 768px) {
+  .wikiModal {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}
+
+.wikiLeft {
+  flex: 0 0 320px;
+  background: #000;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .wikiLeft { flex: 0 0 300px; }
+}
+
+.wikiPortrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wikiRight {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.wikiCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.wikiCloseBtn:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-primary);
+}
+body.dark .wikiCloseBtn:hover { background: rgba(255,255,255,0.1); }
+
+.wikiSeries {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.wikiName {
+  font-family: var(--font-playfair), serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.wikiLoreBox {
+  background: var(--bg-color);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+.wikiLoreText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+.wikiBioGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-color);
+}
+.wikiBioItem {
+  display: flex;
+  flex-direction: column;
+}
+.wikiBioLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.wikiBioValue {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.wikiStatsTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+.wikiStatsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.statCard {
+  background: var(--bg-color);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+.statLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}

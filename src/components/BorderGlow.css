@@ -1,0 +1,63 @@
+.border-glow-card {
+  position: relative;
+  border-radius: var(--border-radius);
+  /* Allows child to overlay perfectly over the backdrop */
+}
+
+/* Sharp edge stroke clipping using a 1.5px border */
+.edge-light {
+  position: absolute;
+  inset: -1.5px;
+  background: conic-gradient(
+    from calc(var(--cursor-angle, 0deg) - var(--cone-spread, 40) * 1deg) at 50% 50%,
+    transparent 0,
+    var(--glow-color, white) calc(var(--cone-spread, 40) * 1deg),
+    transparent calc(var(--cone-spread, 40) * 2deg)
+  );
+  opacity: calc(var(--edge-proximity, 0) / 100);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 2;
+
+  /* Exact border line stroke */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 1.5px; /* width of border stroke */
+  
+  /* Smooth mouse entry/exit */
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Outer softer diffuse glow to give it real volume (ReactBits style) */
+.edge-diffuse {
+  position: absolute;
+  inset: calc(-1px * var(--glow-padding, 16));
+  background: conic-gradient(
+    from calc(var(--cursor-angle, 0deg) - var(--cone-spread, 40) * 1deg) at 50% 50%,
+    transparent 0,
+    var(--glow-color-40) calc(var(--cone-spread, 40) * 1deg),
+    transparent calc(var(--cone-spread, 40) * 2deg)
+  );
+  opacity: calc(var(--edge-proximity, 0) / 100);
+  pointer-events: none;
+  border-radius: calc(var(--border-radius) + var(--glow-padding, 16) * 1.5px);
+  z-index: -1;
+  filter: blur(12px);
+  
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.border-glow-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background: var(--card-bg, transparent);
+  /* The content retains the glass glass-blur aesthetic */
+  z-index: 1;
+  display: flex;
+  flex-direction: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}

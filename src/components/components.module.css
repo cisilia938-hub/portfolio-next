@@ -1,0 +1,451 @@
+/* Perkenalan Split Layout */
+.introLayout {
+  display: flex;
+  flex-direction: column-reverse; /* Text bottom, Photo top on mobile */
+  gap: 80px;
+}
+@media (min-width: 768px) {
+  .introLayout {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.introLeft {
+  flex: 1.5; /* Gives extra space to push text leftwards dynamically */
+}
+
+.lusionHeroTitle {
+  position: relative;
+  font-size: 4rem;
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: -0.09ex;
+  margin-bottom: 0;
+  font-family: "Archivo Black", Arial, sans-serif;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+.lusionHeroTitle span {
+  display: inline-block;
+}
+.lusionHeroTitle span i {
+  display: inline-block;
+  font-style: normal;
+}
+@media (min-width: 812px) { .lusionHeroTitle { font-size: 6rem; line-height: 0.85; margin-left: -0.5rem; } }
+@media (min-width: 1000px) { .lusionHeroTitle { font-size: 7.5rem; line-height: 0.85; margin-left: -0.5rem; } }
+@media (min-width: 1200px) { .lusionHeroTitle { font-size: 8rem; line-height: 0.85; margin-left: -1rem; } }
+
+.lusionHeroDesc {
+  position: relative;
+  max-width: 80%;
+  margin: 3rem 0 3rem 0;
+  line-height: 1.4;
+  font-size: 2rem;
+  color: var(--text-secondary);
+}
+@media (min-width: 1000px) { .lusionHeroDesc { width: 450px; } }
+
+
+.introRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .introRight {
+    justify-content: flex-end;
+  }
+}
+
+.introTextRaw {
+  max-width: 500px;
+}
+
+.photoPlaceholder {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3/4;
+  background: var(--surface-color);
+  border: 2px dashed rgba(208, 50, 84, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+/* Cards */
+.itemCard {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.itemCard:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+.cardImage {
+  height: 160px;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.cardContent {
+  padding: 32px;
+}
+.cardContent h4 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+.cardContent p {
+  color: var(--text-secondary);
+}
+
+.categoryTitle {
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+  margin-top: 40px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  padding: 24px 32px;
+  margin-bottom: 24px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.listItem:hover {
+  transform: translateX(8px);
+}
+.listIcon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Mosaic Grid (Three.js style) */
+.mosaicGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 4px;
+  margin-top: 40px;
+  /* Slight breathing room on sides */
+  width: calc(100vw - 32px);
+  position: relative;
+  left: 50%;
+  margin-left: calc(-50vw + 16px);
+}
+
+.mosaicTile {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.mosaicWide {
+  grid-column: span 2;
+}
+
+.mosaicCover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #0f0f1a;
+}
+
+.mosaicWide .mosaicCover {
+  aspect-ratio: 2 / 1;
+}
+
+.mosaicImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mosaicTile:hover .mosaicImg {
+  transform: scale(1.06);
+}
+
+.mosaicOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mosaicTile:hover .mosaicOverlay {
+  transform: translateY(0);
+}
+
+.mosaicCategory {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+}
+
+.mosaicTitle {
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 4px 0 0;
+  font-weight: 600;
+}
+
+/* Burger Menu */
+.burgerButton {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 110;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.burgerButton:hover .burgerLines span {
+  opacity: 0.6;
+}
+
+.themeToggleBtn {
+  position: fixed;
+  top: 24px;
+  right: 80px;
+  z-index: 110;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.themeToggleBtn:hover {
+  transform: scale(1.1);
+  color: var(--accent-color);
+}
+
+.burgerLines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 28px;
+}
+
+.burgerLines span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.burgerMenu {
+  position: fixed;
+  top: 84px;
+  right: 32px;
+  z-index: 105;
+  background: var(--surface-color);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(208, 50, 84, 0.12);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+}
+
+.burgerMenuItem {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.burgerMenuItem:hover {
+  background: rgba(208, 50, 84, 0.08);
+  color: var(--accent-color);
+}
+
+/* Vertical Timeline */
+.timelineContainer {
+  position: relative;
+  width: 100%;
+  margin: 60px 0 0 0; /* Removed auto to lock it to the left edge */
+  padding: 20px 0;
+}
+
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 60px;
+  padding-left: 50px; /* Tighter padding for a smaller visual footprint */
+}
+
+/* Let the timeline segments exist between nodes instead of one massive container line */
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  top: 24px; /* Start exactly underneath the dot (dot top 8px + height 16px = 24px) */
+  bottom: -68px; /* Extend through the 60px margin-bottom PLUS 8px to exactly touch the next dot! */
+  left: 15px; /* Center pixel of the line */
+  width: 2px;
+  background: var(--accent-color);
+  opacity: 0.5;
+}
+
+.timelineItem:last-child::before {
+  display: none; /* The final node shouldn't have a trailing string */
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  position: absolute;
+  left: 8px; /* 8px + 8px radius = 16px center (matches 15px line + 1px width center) */
+  top: 8px; 
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  z-index: 2;
+}
+
+.timelineDate {
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+  display: block;
+  letter-spacing: 1px;
+}
+
+.timelineContent {
+  width: 100%;
+}
+
+/* 3D Cube */
+.cubeContainer {
+  perspective: 1000px;
+  width: 200px;
+  height: 200px;
+  margin: 60px auto;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spin 10s infinite linear;
+}
+
+.cubeFace {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faceFront  { transform: rotateY(0deg) translateZ(100px); }
+.faceBack   { transform: rotateY(180deg) translateZ(100px); }
+.faceRight  { transform: rotateY(90deg) translateZ(100px); }
+.faceLeft   { transform: rotateY(-90deg) translateZ(100px); }
+.faceTop    { transform: rotateX(90deg) translateZ(100px); }
+.faceBottom { transform: rotateX(-90deg) translateZ(100px); }
+
+@keyframes spin {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.colorPicker {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.colorBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--glass-border);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.colorBtn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px currentColor;
+}

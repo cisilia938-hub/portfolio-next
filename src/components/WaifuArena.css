@@ -1,0 +1,290 @@
+/* WaifuArena.css */
+
+.arenaContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: var(--font-montserrat), sans-serif;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Character Selection */
+.arenaSelectHeader {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.arenaSelectTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.arenaSelectDesc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.arenaRoster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 8px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.arenaFighterCard {
+  width: 130px;
+  flex-shrink: 0;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+  background: #000;
+}
+.arenaFighterCard.selected {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+  z-index: 5;
+}
+.arenaFighterCard.unselected {
+  opacity: 0.6;
+  transform: scale(0.96);
+  filter: grayscale(40%);
+}
+.arenaFighterCard:hover:not(.selected) {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0.95;
+  filter: grayscale(10%);
+}
+.arenaFighterImg {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+.arenaFighterOverlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 8px 8px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  color: white;
+  text-align: center;
+}
+.arenaFighterName {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Battle Stage */
+.battleStage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-color);
+  border-radius: 0;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+body.dark .battleStage { box-shadow: 0 8px 32px rgba(0,0,0,0.3); border: none; }
+
+.vsBadge {
+  font-family: var(--font-playfair), serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ef4444;
+  text-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  z-index: 10;
+}
+
+.fighterSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  z-index: 5;
+}
+
+.fighterPortrait {
+  width: 160px;
+  height: 240px;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  position: relative;
+  background: #000;
+}
+.fighterPortrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fighterInfo {
+  width: 100%;
+  margin-top: 16px;
+  text-align: center;
+}
+.fighterName {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+/* Health Bar */
+.hpBarContainer {
+  width: 100%;
+  height: 12px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+body.dark .hpBarContainer { background: rgba(255,255,255,0.1); }
+
+.hpBarFill {
+  height: 100%;
+  background: #22c55e;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hpBarFill.low { background: #eab308; }
+.hpBarFill.critical { background: #ef4444; }
+
+.hpText {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes shakeLeft {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-8px) rotate(-2deg); }
+  50% { transform: translateX(4px) rotate(1deg); }
+  75% { transform: translateX(-2px) rotate(-1deg); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes shakeRight {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(8px) rotate(2deg); }
+  50% { transform: translateX(-4px) rotate(-1deg); }
+  75% { transform: translateX(2px) rotate(1deg); }
+  100% { transform: translateX(0); }
+}
+
+.hitAnimLeft { animation: shakeLeft 0.35s cubic-bezier(0.2, 0, 0, 1) both; }
+.hitAnimRight { animation: shakeRight 0.35s cubic-bezier(0.2, 0, 0, 1) both; }
+
+.dmgText {
+  position: absolute;
+  top: 30%;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  -webkit-text-stroke: 1px rgba(239, 68, 68, 0.4);
+  text-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Logs and Controls */
+.battleControls {
+  margin-top: 24px;
+  text-align: center;
+  position: sticky;
+  bottom: 24px;
+  z-index: 100;
+}
+.actionBtn {
+  background: #1A73E8;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26,115,232,0.3);
+  transition: all 0.2s;
+  font-family: var(--font-montserrat), sans-serif;
+}
+.actionBtn:hover {
+  background: #1557B0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,115,232,0.4);
+}
+.actionBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+body.dark .actionBtn { background: #8AB4F8; color: #202124; box-shadow: 0 4px 16px rgba(138,180,248,0.2); }
+body.dark .actionBtn:hover { background: #AECBFA; }
+body.dark .actionBtn:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); }
+
+/* Win/Lose Overlay */
+.battleResultOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  border-radius: 0;
+  backdrop-filter: blur(8px);
+}
+.resultTitle {
+  font-family: var(--font-playfair), serif;
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+.resultTitle.victory { color: #facc15; }
+.resultTitle.defeat { color: #ef4444; }
+
+.rewardBox {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  padding: 12px 24px;
+  border-radius: 0;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.cancelBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-montserrat), sans-serif;
+  margin-top: 16px;
+}
+.cancelBtn:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-primary);
+}
+body.dark .cancelBtn:hover { background: rgba(255,255,255,0.1); }
