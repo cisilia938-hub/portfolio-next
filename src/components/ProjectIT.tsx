@@ -34,7 +34,7 @@ export default function ProjectIT() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
     },
   };
 
@@ -44,7 +44,7 @@ export default function ProjectIT() {
         className="heading-title"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         viewport={{ once: true, margin: "-100px" }}
       >
         Recent Project
